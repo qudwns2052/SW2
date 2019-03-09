@@ -3,19 +3,12 @@ using namespace std;
 
 int main()
 {
-	int num, sum = 0;
-	char arr[100];
-	
-	cin >> num;
-	cin >> arr;
+	double a, b;
+	cin >> a;
+	cin >> b;
 
+	cout << a + b << endl;
 
-	for (int i = 0; i < num ; i++)
-	{
-		sum += (arr[i] - '0');
-	}
-
-	cout << sum << endl;
 
 	return 0;
 }
