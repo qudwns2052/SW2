@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #define NAME_LEN 30
+#define PERSON_LEN 6
 
 typedef struct Vege
 {
@@ -22,86 +23,99 @@ void appleTrade(Human * person1, Human * person2, int much);
 void carrotTrade(Human * person1, Human * person2, int much);
 void onionTrade(Human * person1, Human * person2, int much);
 void bananaTrade(Human * person1, Human * person2, int much);
-
+void Search(Human * person[], int num);
 
 int main()
 {
-	int num, much;
-	char name1[NAME_LEN];
-	char name2[NAME_LEN];
-	Human * person1;
-	Human * person2;
+	int num, much, who;
+	int i;
+	char name[NAME_LEN];
+	Human * person[PERSON_LEN];
 
-	printf("이름을 입력하세요: ");
-	scanf("%s", name1);
-
-	printf("이름을 입력하세요: ");
-	scanf("%s", name2);
 	
+	for (i = 0; i < PERSON_LEN - 1; i++)
+	{
+		printf("이름을 입력하세요: ");
+		scanf("%s", name);
+		person[i] = initCustomer(name);
 
-	person1 = initCustomer(name1);
-	person2 = initSeller(name2);
+	}
 
+
+	printf("이름을 입력하세요: ");
+	scanf("%s", name);
+	person[PERSON_LEN - 1] = initSeller(name);
+
+	
 	while (1)
 	{
 		printf("------------------------");
-		printHuman(person1);
-		printHuman(person2);
+		for (i = 0; i < PERSON_LEN; i++)
+			printHuman(person[i]);
+
 		printf("------------------------\n\n\n");
-		printf("무엇을 구매하실 건가요? (1:사과, 2:당근, 3:양파, 4:바나나) (개당 1000원) -> ");
+		printf("구매할 고객을 선택하세요 (몇번째 고객인지) ->  ");
+		scanf("%d", &who);
+		printf("무엇을 구매하실 건가요? (사과: 1, 당근: 2, 양파: 3, 바나나: 4, 사과 찾기: 0) ->  ");
 		scanf("%d", &num);
-		printf("몇개를 구매하실 건가요? -> ");
+		printf("몇개를 구매하실 건가요? (몇개를 찾고 싶나요?) ->  ");
 		scanf("%d", &much);
 		switch (num)
 		{
+		case 0:
+			printf("사과가 %d개 있는 고객을 찾는 중입니다....\n", much);
+			Search(person, much);
+			break;
 		case 1:
-			appleTrade(person1, person2, much);
+			appleTrade(person[who-1], person[PERSON_LEN-1], much);
 			break;
 		case 2:
-			carrotTrade(person1, person2, much);
+			carrotTrade(person[who-1], person[PERSON_LEN - 1], much);
 			break;
 		case 3:
-			onionTrade(person1, person2, much);
+			onionTrade(person[who-1], person[PERSON_LEN - 1], much);
 			break;
 		case 4:
-			bananaTrade(person1, person2, much);
+			bananaTrade(person[who-1], person[PERSON_LEN - 1], much);
 		}
 
 
 	}
-	free(person1);
-	free(person2);
+	for (i = 0; i < PERSON_LEN; i++)
+	{
+		free(person[i]);
+	}
 
 	return 0;
 }
 
-Human * initCustomer(char *name1)
+Human * initCustomer(char *name)
 {
-	Human * person1;
-	person1 = malloc(sizeof(Human));
-	strcpy(person1->name, name1);
-	person1->money = 10000;
-	person1->vege.apple = 0;
-	person1->vege.carrot = 0;
-	person1->vege.onion = 0;
-	person1->vege.banana = 0;
+	Human * person;
+	person = malloc(sizeof(Human));
+	strcpy(person->name, name);
+	person->money = 10000;
+	person->vege.apple = 0;
+	person->vege.carrot = 0;
+	person->vege.onion = 0;
+	person->vege.banana = 0;
 	
 
-	return person1;
+	return person;
 }
 
-Human * initSeller(char *name2)
+Human * initSeller(char *name)
 {
-	Human * person2;
-	person2 = malloc(sizeof(Human));
-	strcpy(person2->name, name2);
-	person2->money = 3000;
-	person2->vege.apple = 10;
-	person2->vege.carrot = 5;
-	person2->vege.onion = 5;
-	person2->vege.banana = 5;
+	Human * person;
+	person = malloc(sizeof(Human));
+	strcpy(person->name, name);
+	person->money = 3000;
+	person->vege.apple = 50;
+	person->vege.carrot = 50;
+	person->vege.onion = 50;
+	person->vege.banana = 50;
 
-	return person2;
+	return person;
 }
 
 void printHuman(Human * human)
@@ -166,5 +180,40 @@ void bananaTrade(Human * person1, Human * person2, int much)
 	person2->vege.banana -= much;
 	person1->money -= (much * 1000);
 	person2->money += (much * 1000);
+
+}
+
+void Search(Human * arr[], int num)
+{
+	int min, mid, max;
+	int ref = -1;
+
+	min = 0;
+	max = PERSON_LEN - 2;
+
+	while (min <= max)
+	{
+		mid = (max + min) / 2;
+
+		if (num == arr[mid]->vege.apple)
+		{
+			ref = mid;
+			break;
+		}
+		else if (num < arr[mid]->vege.apple)
+		{
+			max = mid - 1;
+		}
+		else
+		{
+			min = mid + 1;
+		}
+	}
+
+	if (ref == -1)
+		printf("찾으시는 값이 없습니다\n");
+	else
+		printf("찾으시는 값은 %d번째에 있는 고객입니다\n", ref + 1);
+
 
 }
