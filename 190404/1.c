@@ -6,9 +6,9 @@
 
 typedef struct StackType
 {
-	int *data;
 	int capacity;
 	int top;
+	int *data;
 }StackType;
 
 void StackInit(StackType *s);
@@ -19,7 +19,6 @@ int Isfull(StackType *s);
 void StackInit(StackType * s)
 {
 	s->capacity = 1;
-	s->data = (int*)malloc(sizeof(int)*(s->capacity));
 	s->top = -1;
 
 }
