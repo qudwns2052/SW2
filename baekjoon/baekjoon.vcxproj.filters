@@ -15,10 +15,10 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="연습.c">
+    <ClCompile Include="16719.c">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="10828.c">
+    <ClCompile Include="16719(2).c">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
