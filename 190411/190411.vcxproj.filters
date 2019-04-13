@@ -15,7 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="볼링.c">
+    <ClCompile Include="괄호검사(우선순위o).c">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>

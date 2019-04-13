@@ -1,4 +1,2 @@
-﻿  볼링.c
-c:\users\goka\documents\visual studio 2017\projects\sw2\190411\볼링.c(108): warning C4996: 'scanf': This function or variable may be unsafe. Consider using scanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-  c:\program files (x86)\windows kits\10\include\10.0.17763.0\ucrt\stdio.h(1274): note: 'scanf' 선언을 참조하십시오.
+﻿  괄호검사(우선순위o).c
   190411.vcxproj -> C:\Users\GOKA\Documents\Visual Studio 2017\Projects\sw2\190411\Debug\190411.exe

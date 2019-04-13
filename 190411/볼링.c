@@ -99,11 +99,10 @@ void Sort(List * list, List * newlist)
 int main(void)
 {
 	List list;
-	int i;
 	InitList(&list);
 	int num;
 
-	for (i = 0; i < 10; i++)
+	for (int i = 0; i < 10; i++)
 	{
 		scanf("%d", &num);
 		Add(&list, num);
@@ -121,7 +120,6 @@ int main(void)
 
 	printf("\n\n내림차순 정렬 >>>\n");
 	backPrint(&newlist);
-
 
 
 	system("pause");
