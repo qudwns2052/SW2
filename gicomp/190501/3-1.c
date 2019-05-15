@@ -303,7 +303,7 @@ void showBoard(void)
 	puts(" ");
 }
 
-void showBoard2(void)
+void showBoard2(void)	// 오른쪾 보드판 만들기
 {
 	int x, y;
 
@@ -355,13 +355,13 @@ void showBoard2(void)
 	puts(" ");
 }
 
-int samecnt = 0;
+int samecnt = 0;	// 카운트 전역변수 선언 -> 다른 함수에서 쓰기 위해 전역변수로 선언
 
-void makeBoard2(void)
+void makeBoard2(void)	// 오른쪽 보드판에 블록 배치
 {
 	int x;
 	int y;
-	int cnt;
+	int cnt;	// 카운트 지역변수 선언 -> 오른쪽 보드에 놓인 블록 개수 셈
 
 	for (y = 19; y >= 17; y--)	// board2 초기화작업
 	{
@@ -374,30 +374,33 @@ void makeBoard2(void)
 
 	do
 	{
-		for (y = 19; y >= 17; y--)
+		for (y = 19; y >= 17; y--)	// 맨 아랫줄부터 시작 -> 총 3줄
 		{
 			cnt = 0;
 			for (x = 1; x <= 10; x++)
 			{
-				if (y == 19)
+				if (y == 19)	// 맨 아랫줄
 				{
-					board2[y][x] = rand() % 2;
-					cnt += board2[y][x];
+					board2[y][x] = rand() % 2;	// 0, 1만 나옴
+					cnt += board2[y][x];	// 1 갯수 카운트
 
 				}
-				else if (board2[y + 1][x] == 1)
+				else if (board2[y + 1][x] == 1)	// 맨 아랫줄이 아니면, 아래에 블록이 있을 경우만 블록 생성
 				{
-					board2[y][x] = rand() % 2;
-					cnt += board2[y][x];
+					board2[y][x] = rand() % 2;	// 0, 1만 나옴
+					cnt += board2[y][x];	// 1 갯수 카운트
 				}
 			}
 
 			samecnt += cnt;
 
 			if (cnt == 10)
-				y--;
+			{
+				y++;
+				samecnt -= cnt;
+			}
 		}
-	} while (samecnt == 0);
+	} while (samecnt == 0);	// 블록이 하나도 깔리지 않았을 경우, 다시 블록 생성
 
 
 
@@ -409,16 +412,16 @@ void makeBoard2(void)
 		{
 			setCursor((BOARD2_X)+x * 2 + 1, y + BOARD_Y);
 			if (board2[y][x] == 1)
-				printf("■");
+				printf("■");	// 1에 블록 채우기
 			else
-				printf("  ");
+				printf("  ");	// 0에 빈공간 채우기
 		}
 	}
 
 }
 void scoreLevel(void);
 
-void sameBoard(void)
+void sameBoard(void)	// 왼쪽 보드와 오른쪽 보드가 같은지 확인
 {
 	int x;
 	int y;
@@ -428,22 +431,21 @@ void sameBoard(void)
 	{
 		for (x = 1; x <= 10; x++)
 		{
-			if (board[y][x] == 1)
+			if (board[y][x] == 1)	// 왼쪽 보드에 블록이 있으면
 			{
-				if (board2[y][x] != 1)
-					return;
-				sametemp++;
+				if (board2[y][x] != 1)	// 오른쪽 보드에는 블록이 없으면
+					return;	// 바로 종료
+				sametemp++;	// 오른쪽 보드에도 블록이 있으면, 1 증가
 			}
 		}
 	}
 
-	if (samecnt == sametemp)
+	if (samecnt == sametemp)	// 전역변수 samecnt (오른쪽 블록 갯수)와 양쪽 블록 겹치는 갯수가 같으면 -> 즉, 오른쪽 왼쪽 보드와 오른쪽 보드가 같으면
 	{
-		score += 100;
+		score += 100;	// 100점 추가
 		scoreLevel();
-		samecnt = 0;
-		makeBoard2();
-
+		samecnt = 0;	// 전역변수 samecnt 초기화
+		makeBoard2();	// 오른쪽 보드 블록 새로 생성
 	}
 }
 
@@ -761,7 +763,7 @@ void moveBlock(void)
 				showBlock(n);
 				//딜레이 타임
 				Sleep(DELAY + speed);
-				//아래이동시 1있느지 확인
+				//아래이동시 1있는지 확인
 				if (detect(n, 0, 1) == 1)
 				{
 					ww = 1;
