@@ -15,7 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="3-1.c">
+    <ClCompile Include="오른쪽강제.c">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>

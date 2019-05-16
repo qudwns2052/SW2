@@ -303,7 +303,7 @@ void showBoard(void)
 	puts(" ");
 }
 
-void showBoard2(void)	// 오른쪾 보드판 만들기
+void showBoard2(void)	// 오른쪽 보드판 만들기
 {
 	int x, y;
 
@@ -645,11 +645,18 @@ void countScore(void)
 
 void manyScore(void)
 {
-	if (many != 1)
+	if (many >= 2)
+	{
 		score += many * 10;	//한번에 지운 줄 * 10 만큼 점수 추가
+		setCursor(35, 20);
+		printf("Bouns Score ! %d", many*10);
+		Sleep(1000);
+		setCursor(35, 20);
+		printf("                     ");
+	}
 	many = 0;				//한번에 몇줄 지운지 알려주는 many 초기화
 
-	int beforelevel = level;
+	int beforelevel = level; 
 
 	level = (score / 30) + 1;
 
@@ -685,9 +692,29 @@ void control(void)
 						many++;
 						for (x = 1; x < 11; x++)
 						{
+							setCursor((x + 2) * 2 + 1, y + 2);
+							if (x % 2 == 0)
+								printf("▷");
+							else
+								printf("▶");
+							Sleep(30);
+							
+						}
+						for (x = 1; x < 11; x++)
+						{
+							setCursor((x + 2) * 2 + 1, y + 2);
+							if (x % 2 == 0)
+								printf("▶");
+							else
+								printf("▷");
+							Sleep(30);
+
+						}
+						/*for (x = 1; x < 11; x++)
+						{
 							setCursor((x + 2) * 2, y + 2);
 							printf("  ");
-						}
+						}*/
 						//행 기준으로 블록 내리기
 						countScore();
 						array_down(y);
