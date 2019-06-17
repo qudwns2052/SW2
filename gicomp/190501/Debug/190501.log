@@ -1,2 +1,3 @@
-﻿  오른쪽강제.c
+﻿  연습.c
+c:\users\goka\documents\visual studio 2017\projects\sw2\gicomp\190501\연습.c(8): warning C4477: 'printf' : 서식 문자열 '%x'에 'unsigned int' 형식의 인수가 필요하지만 variadic 인수 1의 형식이 'int *'입니다.
   190501.vcxproj -> C:\Users\GOKA\Documents\Visual Studio 2017\Projects\sw2\gicomp\190501\Debug\190501.exe

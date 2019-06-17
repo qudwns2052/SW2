@@ -1,12 +1,11 @@
-/*블로그:yk209.tistory.com
-  도와주신분:형일 형님*/
-
 #include <stdio.h>
 #include <windows.h>
 #include <stdlib.h>
 #include <time.h>
 #include <conio.h>
 
+int * a, b;
+int *a, *b;
 #define BOARD_HEIGHT 20 // ┃개수
 #define BOARD_WIDTH 10  // ━개수
 #define BOARD_X 4 //보드 열 x좌표
@@ -649,7 +648,7 @@ void manyScore(void)
 	{
 		score += many * 10;	//한번에 지운 줄 * 10 만큼 점수 추가
 		setCursor(35, 20);
-		printf("Bouns Score ! %d", many*10);
+		printf("Bonus Score ! %d", many*10);
 		Sleep(1000);
 		setCursor(35, 20);
 		printf("                     ");
